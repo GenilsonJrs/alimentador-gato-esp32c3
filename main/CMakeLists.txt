@@ -1,0 +1,21 @@
+idf_component_register(
+    SRCS
+        "main.c"
+        "wifi.c"
+        "time_sync.c"
+        "servo.c"
+        "schedule.c"
+        "telegram.c"
+    INCLUDE_DIRS "."
+    REQUIRES
+        nvs_flash
+        esp_wifi
+        esp_event
+        esp_netif
+        esp_http_client
+        esp-tls
+        mbedtls
+        json
+        driver
+        lwip
+)

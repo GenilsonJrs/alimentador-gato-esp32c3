@@ -1,0 +1,18 @@
+# Build do ESP-IDF
+build/
+sdkconfig
+sdkconfig.old
+
+# Componentes baixados pelo gerenciador + lock
+managed_components/
+dependencies.lock
+
+# SEGREDOS: Wi-Fi e token do bot do Telegram (NUNCA versionar)
+main/secrets.h
+
+# Logs e capturas de teste serial
+*.log
+serial_*.txt
+
+# 3D e imagens: entram depois (apos imprimir/validar)
+3d/

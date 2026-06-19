@@ -1,0 +1,6 @@
+# Name,   Type, SubType, Offset,   Size
+# Tabela customizada: app de 3 MB (placa C3 Super Mini tem 4 MB de flash).
+# A particao nvs guarda os horarios cadastrados (sobrevive a quedas de energia).
+nvs,      data, nvs,     0x9000,   0x6000
+phy_init, data, phy,     0xf000,   0x1000
+factory,  app,  factory, 0x10000,  0x300000

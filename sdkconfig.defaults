@@ -1,0 +1,17 @@
+# Alvo
+CONFIG_IDF_TARGET="esp32c3"
+
+# HTTPS para a API do Telegram usando o pacote de certificados embutido (esp_crt_bundle).
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE=y
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE_DEFAULT_FULL=y
+
+# Log padrao em nivel INFO (bom para acompanhar pelo monitor serial)
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+
+# Flash de 4 MB (ESP32-C3 Super Mini) com tabela de particoes customizada
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# A task principal inicializa Wi-Fi/TLS; uma pilha um pouco maior evita aperto.
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=6144
