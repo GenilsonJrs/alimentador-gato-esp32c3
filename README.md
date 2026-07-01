@@ -1,17 +1,41 @@
-# Alimentador de Gato — ESP32-C3 + Servo SG90 + Telegram
+<h1 align="center">🐱 Alimentador de Gato — ESP32-C3 + Telegram</h1>
 
-Alimentador automático controlado por **Wi-Fi**, usando **ESP-IDF** em C. Você comanda
-de **qualquer lugar** por um **bot do Telegram**: serve ração na hora (por X segundos)
-ou cadastra horários fixos. Os horários ficam salvos na flash (NVS) e sobrevivem a
-quedas de energia. O relógio é sincronizado por NTP (fuso de Brasília).
+<p align="center">
+  Alimentador automático controlado por <b>Wi-Fi</b>: sirva ração <b>de qualquer lugar</b>
+  por um <b>bot do Telegram</b>, na hora ou em <b>horários agendados</b>. As agendas ficam
+  salvas na flash (NVS) e <b>sobrevivem a quedas de energia</b>.
+</p>
 
-## Como funciona
+<p align="center">
+  <img src="https://img.shields.io/badge/ESP32--C3-E7352C?logo=espressif&logoColor=white" alt="ESP32-C3">
+  <img src="https://img.shields.io/badge/ESP--IDF-v5.x-blue?logo=espressif&logoColor=white" alt="ESP-IDF">
+  <img src="https://img.shields.io/badge/Telegram-Bot%20API-26A5E4?logo=telegram&logoColor=white" alt="Telegram Bot">
+  <img src="https://img.shields.io/badge/Servo-SG90-FF6F00" alt="Servo SG90">
+  <img src="https://img.shields.io/badge/Linguagem-C-00599C?logo=c&logoColor=white" alt="C">
+</p>
 
-O servo gira a comporta para a posição **aberta**, espera os segundos pedidos e
-volta para **fechada**. Tudo é PWM de 50 Hz gerado pelo periférico LEDC no **GPIO 2**.
+---
 
-```
-Você (Telegram) --internet--> api.telegram.org <--long polling-- ESP32-C3 --PWM--> Servo SG90
+## ✨ O que faz
+
+- 🍽️ **Serve na hora** pelo comando `/alimentar` (porção padrão ou por N segundos).
+- ⏰ **Agenda horários fixos** (ex.: todo dia 08:00) que disparam sozinhos.
+- 💾 **Persiste as agendas na NVS** — não se perdem ao reiniciar ou faltar energia.
+- 🕒 **Relógio via NTP** (fuso de Brasília), garantindo que os horários batam.
+- 🔒 **Trava por chat_id**: só o seu Telegram consegue acionar o alimentador.
+- 🔌 **Autônomo**: roda em qualquer fonte 5V/USB, sem PC, e reconecta o Wi-Fi sozinho.
+
+## 🧠 Como funciona
+
+O servo gira a comporta para a posição **aberta**, espera os segundos pedidos e volta
+para **fechada**. O sinal é um PWM de 50 Hz gerado pelo periférico **LEDC** no **GPIO 2**.
+
+```mermaid
+flowchart LR
+    U["📱 Você (Telegram)"] -->|internet| API["☁️ api.telegram.org"]
+    API <-->|long polling| ESP["📟 ESP32-C3"]
+    ESP -->|PWM 50 Hz| S["⚙️ Servo SG90"]
+    S -->|abre/fecha comporta| R["🥣 Ração"]
 ```
 
 ## Ligação (hardware)
