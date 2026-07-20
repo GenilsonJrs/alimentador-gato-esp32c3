@@ -1,4 +1,4 @@
-<h1 align="center">🐱 Alimentador de Gato — ESP32-C3 + Telegram</h1>
+<h1 align="center">Alimentador de Gato — ESP32-C3 + Telegram</h1>
 
 <p align="center">
   Alimentador automático controlado por <b>Wi-Fi</b>: sirva ração <b>de qualquer lugar</b>
@@ -16,35 +16,35 @@
 
 ---
 
-## ✨ O que faz
+## O que faz
 
-- 🍽️ **Serve na hora** pelo comando `/alimentar` (porção padrão ou por N segundos).
-- ⏰ **Agenda horários fixos** (ex.: todo dia 08:00) que disparam sozinhos.
-- 💾 **Persiste as agendas na NVS** — não se perdem ao reiniciar ou faltar energia.
-- 🕒 **Relógio via NTP** (fuso de Brasília), garantindo que os horários batam.
-- 🔒 **Trava por chat_id**: só o seu Telegram consegue acionar o alimentador.
-- 🔌 **Autônomo**: roda em qualquer fonte 5V/USB, sem PC, e reconecta o Wi-Fi sozinho.
+- **Serve na hora** pelo comando `/alimentar` (porção padrão ou por N segundos).
+- **Agenda horários fixos** (ex.: todo dia 08:00) que disparam sozinhos.
+- **Persiste as agendas na NVS** — não se perdem ao reiniciar ou faltar energia.
+- **Relógio via NTP** (fuso de Brasília), garantindo que os horários batam.
+- **Trava por chat_id**: só o seu Telegram consegue acionar o alimentador.
+- **Autônomo**: roda em qualquer fonte 5V/USB, sem PC, e reconecta o Wi-Fi sozinho.
 
-## 🧠 Como funciona
+## Como funciona
 
 O servo gira a comporta para a posição **aberta**, espera os segundos pedidos e volta
 para **fechada**. O sinal é um PWM de 50 Hz gerado pelo periférico **LEDC** no **GPIO 2**.
 
 ```mermaid
 flowchart LR
-    U["📱 Você (Telegram)"] -->|internet| API["☁️ api.telegram.org"]
-    API <-->|long polling| ESP["📟 ESP32-C3"]
-    ESP -->|PWM 50 Hz| S["⚙️ Servo SG90"]
-    S -->|abre/fecha comporta| R["🥣 Ração"]
+    U[" Você (Telegram)"] -->|internet| API[" api.telegram.org"]
+    API <-->|long polling| ESP[" ESP32-C3"]
+    ESP -->|PWM 50 Hz| S[" Servo SG90"]
+    S -->|abre/fecha comporta| R[" Ração"]
 ```
 
 ## Ligação (hardware)
 
-| SG90        | ESP32-C3        |
+| SG90 | ESP32-C3 |
 |-------------|-----------------|
-| Sinal (laranja) | GPIO 2      |
-| VCC (vermelho)  | 5V             |
-| GND (marrom)    | GND            |
+| Sinal (laranja) | GPIO 2 |
+| VCC (vermelho) | 5V |
+| GND (marrom) | GND |
 
 - O sinal de 3,3 V do C3 já aciona o SG90 sem problema.
 - **Alimentação:** o SG90 puxa picos de ~500 mA quando força. Se possível, use uma
